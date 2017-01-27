@@ -54,10 +54,10 @@ class Perceptron:
 
         return self
 
-    def net_input(self, xi):
-        """Calculate net input"""
-        return np.dot(xi, self.w_[1:]) + self.w_[0]
+    def predict(self, S):
+        """Classify sample S (as 1 or -1)"""
+        return np.where(self._net_input(S) >= 0.0, 1, -1)
 
-    def predict(self, xi):
-        """Return class label after unit step"""
-        return np.where(self.net_input(xi) >= 0.0, 1, -1)
+    def _net_input(self, S):
+        """Calculate net input from sample S"""
+        return np.dot(S, self.w_[1:]) + self.w_[0]
